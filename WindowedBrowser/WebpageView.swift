@@ -18,11 +18,13 @@ struct WebpageView: View {
     
     var body: some View {
         WebView(webView: webViewStore.webView)
-        .ignoresSafeArea(.container)
+        .ignoresSafeArea()
         .onAppear {
             if !loaded {
-                self.webViewStore.webView.navigationDelegate = navDelegate
-                self.webViewStore.webView.load(URLRequest(url: entryURL))
+                let wv = self.webViewStore.webView
+                wv.navigationDelegate = navDelegate
+                wv.scrollView.contentInsetAdjustmentBehavior = .never
+                wv.load(URLRequest(url: entryURL))
                 loaded = true
             }
         }
