@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "faviconfinder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/will-lumley/FaviconFinder",
+      "state" : {
+        "revision" : "48f98ceadd8ee3d484016201fe1115d0d23fa87d",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup.git",
+      "state" : {
+        "revision" : "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
+        "version" : "2.6.1"
+      }
+    },
+    {
+      "identity" : "swiftui-webview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kylehickinson/SwiftUI-WebView",
+      "state" : {
+        "revision" : "a67dcaff2377573a51f75761bb6e768b78931909",
+        "version" : "0.3.0"
+      }
+    }
+  ],
+  "version" : 2
+}
