@@ -11,6 +11,9 @@ import FaviconFinder
 struct ContentView: View {
     @Environment(\.openWindow) var openWindow
     @Environment(\.dismissWindow) var dismissWindow
+    @Environment(\.dismiss) var dismiss
+    
+    @AppStorage("_OPEN_TABS") var openTabs: [TabInfo] = []
     
     @State var str: String = ""
     @State var allWindowsURL: [(UIImage, String)] = []
@@ -72,6 +75,13 @@ struct ContentView: View {
                 if let toOpen = tmp.last {
                     openWindow(id: "com.wyw.wb.webview", value: safeURL(toOpen))
                 }
+            }
+        }
+        .onAppear {
+            if homeWindowOpen {
+                dismiss()
+            } else {
+                homeWindowOpen = true
             }
         }
     }

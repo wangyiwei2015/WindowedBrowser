@@ -20,3 +20,5 @@ struct WindowedBrowserApp: App {
         }.defaultSize(width: .infinity, height: .infinity)
     }
 }
+
+var homeWindowOpen = false
