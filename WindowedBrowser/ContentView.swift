@@ -15,53 +15,21 @@ struct ContentView: View {
     
     @AppStorage("_OPEN_TABS") var openTabs: [TabInfo] = []
     
-    @State var str: String = ""
+    @State var str: String = "https://"
     @State var allWindowsURL: [(UIImage, String)] = []
     
+    @State var showsQuitAlert = false
+    
     var body: some View {
-        VStack {
-            Button("minimize") {
-                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-            }
-            Text("URL scheme: w-browser://new?url={URL}")
-            Text("Bookmarks")
-            Button("NAS-SMALL") {
-                openWindow(id: "com.wyw.wb.webview", value: safeURL("https://10.19.129.75:5001"))
-            }
-            Text("Launch")
-            TextField("URL", text: $str)
-                .keyboardType(.URL)
-            Button("open") {
-                if !allWindowsURL.contains(where: {$0.1 == str}) {
-                    allWindowsURL.append((UIImage(), str))
-                    Task {
-                        do {
-                            let favicon = try await FaviconFinder(url: safeURL(str))
-                                .downloadFavicon()
-                            //print("URL of Favicon: \(favicon.url)")
-                            let idx = allWindowsURL.firstIndex(where: {$0.1 == str})!
-                            allWindowsURL[idx].0 = favicon.image
-                        } catch let error {print("Error: \(error)")}
-                    }
-                }
-                openWindow(id: "com.wyw.wb.webview", value: safeURL(str))
-                str = ""
-            }
-            ForEach(0..<allWindowsURL.count, id: \.self) {windowIndex in
-                HStack {
-                    Image(uiImage: allWindowsURL[windowIndex].0)
-                        .resizable().scaledToFit().frame(width: 24, height: 24)
-                    Text(allWindowsURL[windowIndex].1)
-                }
-                .contextMenu {
-                    Button("close") {
-                        dismissWindow(id: "com.wyw.wb.webview", value: safeURL(allWindowsURL[windowIndex].1))
-                        allWindowsURL.remove(at: windowIndex)
-                    }
-                }
-            }
+        VStack(spacing: 0) {
+            topBar.frame(height: 48)
+            launchURLView
+            bookmarkView
+            Spacer()
+            bottomTabs
         }
-        .padding()
+        .background(Color.gray6)
+        .ignoresSafeArea()
         .onOpenURL { url in
             print(url)
             guard url.scheme == "w-browser" else {
@@ -84,9 +52,146 @@ struct ContentView: View {
                 homeWindowOpen = true
             }
         }
+        .alert(
+            Text("Quit WBrowser"), isPresented: $showsQuitAlert) {
+                Button("Cancel", role: .cancel) {
+                    //
+                }
+                Button("Quit", role: .destructive) {
+                    UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                    Task {
+                        try? await Task.sleep(nanoseconds: 1_000_000_000)
+                        exit(0)
+                    }
+                }
+            } message: {
+                Text("You have \(allWindowsURL.count) open windows")
+            }
+    }
+    
+    func newTab(_ urlString: String) {
+        if !allWindowsURL.contains(where: {$0.1 == urlString}) {
+            allWindowsURL.append((UIImage(), urlString))
+            Task {
+                do {
+                    let favicon = try await FaviconFinder(url: safeURL(urlString))
+                        .downloadFavicon()
+                    //print("URL of Favicon: \(favicon.url)")
+                    let idx = allWindowsURL.firstIndex(where: {$0.1 == urlString})!
+                    allWindowsURL[idx].0 = favicon.image
+                } catch let error {print("Error: \(error)")}
+            }
+        }
+        openWindow(id: "com.wyw.wb.webview", value: safeURL(urlString))
+    }
+    
+    @ViewBuilder var topBar: some View {
+        ZStack {
+            Color.sysBackground
+            HStack(spacing: 0) {
+                Text("WBrowser Home (\(allWindowsURL.count) tabs)")
+                    //.font(.)
+                    .padding(.horizontal, 20)
+                Spacer()
+                Button {
+                    UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                } label: {
+                    Image(systemName: "minus").font(.title3).tint(.gray3)
+                }.buttonStyle(TopbarBtnStyle(tint: .gray5)).frame(width: 50)
+                //.hoverEffect(.highlight)
+                Button {
+                    showsQuitAlert = true
+                } label: {
+                    Image(systemName: "xmark").font(.title3).tint(.gray3)
+                }.buttonStyle(TopbarBtnStyle(tint: .red)).frame(width: 50)
+            }.padding(.top, 8)
+        }
+    } // top view
+    
+    @ViewBuilder var launchURLView: some View {
+        HStack(spacing: 0) {
+            Text("New tab").frame(width: 110)
+            TextField("URL", text: $str)
+                .keyboardType(.URL)
+                .textFieldStyle(.roundedBorder)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
+                .shadow(radius: 1, y: 2)
+            Button {
+                newTab(str)
+                str = "https://"
+            } label: {
+                Label("Go", systemImage: "swift").foregroundColor(Color("WBColor"))
+            }.buttonStyle(HomeBtnStyle())
+            .frame(width: 90, height: 35).padding()
+        }.font(.title3)
+        .padding(.vertical)
+    } // launch url
+    
+    @ViewBuilder var bookmarkView: some View {
+        VStack {
+            Text("URL scheme: w-browser://new?url={URL}")
+            Text("Bookmarks")
+            Button("NAS-SMALL") {
+                newTab("https://10.19.129.75:5001")
+//                openWindow(
+//                    id: "com.wyw.wb.webview",
+//                    value: safeURL("https://10.19.129.75:5001")
+//                )
+            }
+        }
+    } // bookmarks
+    
+    @ViewBuilder var bottomTabs: some View {
+        VStack {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
+                ForEach(0..<allWindowsURL.count, id: \.self) {windowIndex in
+                    Menu {
+                        menuItems(windowIndex)
+                    } label: {
+                        ZStack {
+                            HStack {
+                                Image(uiImage: allWindowsURL[windowIndex].0)
+                                    .resizable().scaledToFit().frame(width: 24, height: 24)
+                                Text(allWindowsURL[windowIndex].1).lineLimit(1)
+                            }.padding(.vertical, 12).padding(.horizontal, 8)
+                        }.contextMenu {
+                            menuItems(windowIndex)
+                        } // ZStack & ContextMenu
+                    } // Menu label
+                    .buttonStyle(HomeBtnStyle()).foregroundColor(Color("WBColor"))
+                } // For each
+            }.padding(.horizontal)
+            Text("\(UIScreen.main.bounds.debugDescription)")
+        }
+    } // bottom view
+    
+    @ViewBuilder func menuItems(_ windowIndex: Int) -> some View {
+        Button(role: .destructive) {
+            dismissWindow(id: "com.wyw.wb.webview", value: safeURL(allWindowsURL[windowIndex].1))
+            allWindowsURL.remove(at: windowIndex)
+        } label: {
+            Label("Close", systemImage: "xmark")
+        }
+        Button {
+            //
+        } label: {
+            Label("Add bookmark", systemImage: "swift")
+        }
+        Button {
+            openWindow(id: "com.wyw.wb.webview", value: safeURL(allWindowsURL[windowIndex].1))
+        } label: {
+            Label("Show", systemImage: "swift")
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(allWindowsURL: [
+        (UIImage(systemName: "swift")!, "www.aaa.com"),
+        (UIImage(systemName: "swift")!, "www.aaa.com"),
+        (UIImage(systemName: "swift")!, "www.aaa.com"),
+        (UIImage(systemName: "swift")!, "www.aaa.com"),
+        (UIImage(systemName: "swift")!, "www.aaa.com"),
+    ])
 }
