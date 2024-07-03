@@ -13,7 +13,7 @@ struct WindowedBrowserApp: App {
         WindowGroup("Home", id: "com.wyw.wb.main") {
             ContentView()
         }
-        .defaultSize(width: 10, height: 10)
+        .defaultSize(width: 20, height: 16)
         
         WindowGroup("Web Page",id: "com.wyw.wb.webview", for: URL.self) { url in
             WebpageView(entryURL: url.wrappedValue ?? URL(string: "about:blank")!)

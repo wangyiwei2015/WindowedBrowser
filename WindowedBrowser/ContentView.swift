@@ -51,6 +51,12 @@ struct ContentView: View {
             } else {
                 homeWindowOpen = true
             }
+            onCloseWindow = { url in
+                print(allWindowsURL.first(where: { safeURL($0.1) == url }))
+                allWindowsURL.removeAll(
+                    where: { safeURL($0.1) == url }
+                )
+            }
         }
         .alert(
             Text("Quit WBrowser"), isPresented: $showsQuitAlert) {

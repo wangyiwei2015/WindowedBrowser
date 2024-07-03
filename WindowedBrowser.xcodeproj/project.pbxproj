@@ -17,6 +17,7 @@
 		B32110122AE0297C00223753 /* WebpageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32110112AE0297C00223753 /* WebpageData.swift */; };
 		B32110152AE02AF900223753 /* FaviconFinder in Frameworks */ = {isa = PBXBuildFile; productRef = B32110142AE02AF900223753 /* FaviconFinder */; };
 		B3F6C45C2C32726A008CB576 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6C45B2C32726A008CB576 /* Styles.swift */; };
+		B3F6C45E2C357830008CB576 /* GlobalMsgHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6C45D2C357830008CB576 /* GlobalMsgHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		B32110112AE0297C00223753 /* WebpageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebpageData.swift; sourceTree = "<group>"; };
 		B32110162AE02CA800223753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B3F6C45B2C32726A008CB576 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		B3F6C45D2C357830008CB576 /* GlobalMsgHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMsgHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				B3210FFF2AE0146700223753 /* Assets.xcassets */,
 				B32110012AE0146700223753 /* Preview Content */,
 				B3F6C45B2C32726A008CB576 /* Styles.swift */,
+				B3F6C45D2C357830008CB576 /* GlobalMsgHelper.swift */,
 				B321100E2AE018EA00223753 /* Globals.swift */,
 				B32110102AE01C1800223753 /* TODO.md */,
 			);
@@ -169,6 +172,7 @@
 				B3210FFE2AE0146600223753 /* ContentView.swift in Sources */,
 				B32110122AE0297C00223753 /* WebpageData.swift in Sources */,
 				B3F6C45C2C32726A008CB576 /* Styles.swift in Sources */,
+				B3F6C45E2C357830008CB576 /* GlobalMsgHelper.swift in Sources */,
 				B321100D2AE018B900223753 /* WebpageView.swift in Sources */,
 				B3210FFC2AE0146600223753 /* WindowedBrowserApp.swift in Sources */,
 			);

@@ -13,6 +13,8 @@ struct WebpageView: View {
     var entryURL: URL
     fileprivate let navDelegate = SimpleDelegate()
     
+    let helper = GlobalMsgHelper()
+    
     @StateObject var webViewStore = WebViewStore()
     @State var loaded = false
     
@@ -26,6 +28,9 @@ struct WebpageView: View {
                 wv.scrollView.contentInsetAdjustmentBehavior = .never
                 wv.load(URLRequest(url: entryURL))
                 loaded = true
+                helper.onDestruction = {
+                    onCloseWindow?(entryURL)
+                }
             }
         }
         .onDisappear {print("disap")}
