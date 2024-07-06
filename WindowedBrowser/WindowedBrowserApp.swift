@@ -20,6 +20,10 @@ struct WindowedBrowserApp: App {
         WindowGroup("Web Page",id: "com.wyw.wb.webview", for: URL.self) { url in
             WebpageView(entryURL: url.wrappedValue ?? URL(string: "about:blank")!)
         }.defaultSize(width: .infinity, height: .infinity)
+        
+        WindowGroup("Preferences", id: "com.wyw.wb.prefs") {
+            PrefsView()
+        } //.defaultSize(width: .infinity, height: .infinity)
     }
 }
 

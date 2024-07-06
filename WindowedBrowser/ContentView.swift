@@ -20,16 +20,53 @@ struct ContentView: View {
     @State var allWindowsURL: [(UIImage, String)] = []
     
     @State var showsQuitAlert = false
+    @State var iPhoneShowsConfig = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            topBar.frame(height: supportsMultipleWindows ? 48 : 60)
-            launchURLView
-            bookmarkView
-            Spacer()
-            bottomTabs
+        ZStack {
+            Color.gray6
+            VStack(spacing: 0) {
+                VStack(spacing: 0) {
+                    Color.sysBackground
+                    topBar.frame(height: supportsMultipleWindows ? 48 : 90)
+                }.frame(height: supportsMultipleWindows ? 48 : 90)
+                launchURLView
+                bookmarkView
+                Spacer()
+                bottomTabs
+            }
+            // overlay
+            if !supportsMultipleWindows {
+                Color.black.opacity(
+                    iPhoneShowsConfig ? 0.5 : 0.0
+                )
+                if iPhoneShowsConfig {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                            .fill(Color.sysBackground)
+                            .stroke(.black.opacity(0.5), lineWidth: 0.2)
+                            .shadow(radius: 3,y: 4)
+                            .zIndex(1)
+                        PrefsView().padding(6)
+                            .zIndex(2)
+                        VStack {
+                            HStack {
+                                Spacer()
+                                Button {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        iPhoneShowsConfig = false
+                                    }
+                                } label: {
+                                    Image(systemName: "xmark").font(.title3).tint(.gray3)
+                                }.buttonStyle(TopbarBtnStyle(tint: .gray5)).frame(width: 50, height: 48)
+                                    .padding(.trailing, 6)
+                            }
+                            Spacer()
+                        }.zIndex(3)
+                    }.padding(.vertical, 75).padding(.horizontal, 16)
+                }
+            }
         }
-        .background(Color.gray6)
         .ignoresSafeArea()
         .onOpenURL { url in
             print(url)
@@ -64,7 +101,7 @@ struct ContentView: View {
                 Button("Cancel", role: .cancel) {
                     //
                 }
-                Button("Quit", role: .destructive) {
+                Button("Quit?", role: .destructive) {
                     UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
                     Task {
                         try? await Task.sleep(nanoseconds: 1_000_000_000)
@@ -146,11 +183,17 @@ struct ContentView: View {
             Text("Bookmarks")
             Button("NAS-SMALL") {
                 newTab("https://10.19.129.75:5001")
-//                openWindow(
-//                    id: "com.wyw.wb.webview",
-//                    value: safeURL("https://10.19.129.75:5001")
-//                )
             }
+            
+            Button("Preferences") {
+                if supportsMultipleWindows {
+                    openWindow(id: "com.wyw.wb.prefs")
+                } else {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        iPhoneShowsConfig = true
+                    }
+                }
+            } // Prefs btn
         }
     } // bookmarks
     
@@ -212,5 +255,5 @@ struct ContentView: View {
         (UIImage(systemName: "swift")!, "www.aaa.com"),
         (UIImage(systemName: "swift")!, "www.aaa.com"),
         (UIImage(systemName: "swift")!, "www.aaa.com"),
-    ])
+    ], iPhoneShowsConfig: true)
 }

@@ -16,6 +16,7 @@
 		B321100F2AE018EA00223753 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B321100E2AE018EA00223753 /* Globals.swift */; };
 		B32110122AE0297C00223753 /* WebpageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32110112AE0297C00223753 /* WebpageData.swift */; };
 		B32110152AE02AF900223753 /* FaviconFinder in Frameworks */ = {isa = PBXBuildFile; productRef = B32110142AE02AF900223753 /* FaviconFinder */; };
+		B3BD5DC32C39423600AC22F2 /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BD5DC22C39423600AC22F2 /* PrefsView.swift */; };
 		B3F6C45C2C32726A008CB576 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6C45B2C32726A008CB576 /* Styles.swift */; };
 		B3F6C45E2C357830008CB576 /* GlobalMsgHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6C45D2C357830008CB576 /* GlobalMsgHelper.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		B32110102AE01C1800223753 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		B32110112AE0297C00223753 /* WebpageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebpageData.swift; sourceTree = "<group>"; };
 		B32110162AE02CA800223753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B3BD5DC22C39423600AC22F2 /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
 		B3F6C45B2C32726A008CB576 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		B3F6C45D2C357830008CB576 /* GlobalMsgHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMsgHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +74,7 @@
 				B3210FFD2AE0146600223753 /* ContentView.swift */,
 				B321100C2AE018B900223753 /* WebpageView.swift */,
 				B32110112AE0297C00223753 /* WebpageData.swift */,
+				B3BD5DC22C39423600AC22F2 /* PrefsView.swift */,
 				B3210FFF2AE0146700223753 /* Assets.xcassets */,
 				B32110012AE0146700223753 /* Preview Content */,
 				B3F6C45B2C32726A008CB576 /* Styles.swift */,
@@ -173,6 +176,7 @@
 				B32110122AE0297C00223753 /* WebpageData.swift in Sources */,
 				B3F6C45C2C32726A008CB576 /* Styles.swift in Sources */,
 				B3F6C45E2C357830008CB576 /* GlobalMsgHelper.swift in Sources */,
+				B3BD5DC32C39423600AC22F2 /* PrefsView.swift in Sources */,
 				B321100D2AE018B900223753 /* WebpageView.swift in Sources */,
 				B3210FFC2AE0146600223753 /* WindowedBrowserApp.swift in Sources */,
 			);
@@ -306,7 +310,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"WindowedBrowser/Preview Content\"";
 				DEVELOPMENT_TEAM = JS2ME2LTBF;
 				ENABLE_PREVIEWS = YES;
@@ -324,7 +328,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.4;
+				MARKETING_VERSION = 0.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.WindowedBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -341,7 +345,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"WindowedBrowser/Preview Content\"";
 				DEVELOPMENT_TEAM = JS2ME2LTBF;
 				ENABLE_PREVIEWS = YES;
@@ -359,7 +363,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.4;
+				MARKETING_VERSION = 0.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.WindowedBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
