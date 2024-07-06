@@ -115,13 +115,17 @@ struct PrefsView: View {
                         NavigationLink {
                             Text(item.name + "\(item.group)")
                         } label: {
-                            ZStack {Text(item.name)}
+                            sideLabel(
+                                item.name,
+                                fullImg: sysImg[item.order].fullImg,
+                                miniImg: sysImg[item.order].miniImg
+                            )
                         }
                         .buttonStyle(HomeBtnStyle())
                         .frame(height: 50)
                         .padding(.horizontal)
                     }
-                }
+                }.padding(.vertical)
             }.navigationTitle("All Preferences")
         }.tint(Color("WBColor")) // Nav View
     }
