@@ -12,8 +12,10 @@ struct WindowedBrowserApp: App {
     var body: some Scene {
         WindowGroup("Home", id: "com.wyw.wb.main") {
             ContentView()
-        }
-        .defaultSize(width: 20, height: 16)
+        }.defaultSize(width: 20, height: 16)
+        #if os(macOS)
+        .windowStyle(.hiddenTitleBar)
+        #endif
         
         WindowGroup("Web Page",id: "com.wyw.wb.webview", for: URL.self) { url in
             WebpageView(entryURL: url.wrappedValue ?? URL(string: "about:blank")!)
