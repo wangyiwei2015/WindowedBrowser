@@ -9,6 +9,7 @@ import SwiftUI
 import FaviconFinder
 
 struct ContentView: View {
+    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
     @Environment(\.openWindow) var openWindow
     @Environment(\.dismissWindow) var dismissWindow
     @Environment(\.dismiss) var dismiss
@@ -22,7 +23,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            topBar.frame(height: 48)
+            topBar.frame(height: supportsMultipleWindows ? 48 : 60)
             launchURLView
             bookmarkView
             Spacer()
@@ -88,16 +89,21 @@ struct ContentView: View {
                 } catch let error {print("Error: \(error)")}
             }
         }
-        openWindow(id: "com.wyw.wb.webview", value: safeURL(urlString))
+        if supportsMultipleWindows {
+            openWindow(id: "com.wyw.wb.webview", value: safeURL(urlString))
+        } else { // iPhone
+            //
+        }
     }
     
     @ViewBuilder var topBar: some View {
         ZStack {
             Color.sysBackground
             HStack(spacing: 0) {
-                Text("WBrowser Home (\(allWindowsURL.count) tabs)")
-                    //.font(.)
-                    .padding(.horizontal, 20)
+                Text(supportsMultipleWindows
+                    ? "WBrowser Home (\(allWindowsURL.count) tabs)"
+                     : "\(allWindowsURL.count) tabs"
+                ).padding(.horizontal, 20)
                 Spacer()
                 Button {
                     UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
@@ -116,7 +122,7 @@ struct ContentView: View {
     
     @ViewBuilder var launchURLView: some View {
         HStack(spacing: 0) {
-            Text("New tab").frame(width: 110)
+            Text("URL").frame(width: 70)
             TextField("URL", text: $str)
                 .keyboardType(.URL)
                 .textFieldStyle(.roundedBorder)
@@ -174,7 +180,14 @@ struct ContentView: View {
     
     @ViewBuilder func menuItems(_ windowIndex: Int) -> some View {
         Button(role: .destructive) {
-            dismissWindow(id: "com.wyw.wb.webview", value: safeURL(allWindowsURL[windowIndex].1))
+            if supportsMultipleWindows {
+                dismissWindow(
+                    id: "com.wyw.wb.webview",
+                    value: safeURL(allWindowsURL[windowIndex].1)
+                )
+            } else { // iPhone
+                //
+            }
             allWindowsURL.remove(at: windowIndex)
         } label: {
             Label("Close", systemImage: "xmark")
