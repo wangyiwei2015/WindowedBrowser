@@ -19,10 +19,16 @@ struct TopbarBtnStyle: ButtonStyle {
 }
 
 struct HomeBtnStyle: ButtonStyle {
+    var highlighted: Bool = false
+    
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 6, style: .continuous)
-                .fill(configuration.isPressed ? Color.gray6 : Color.sysBackground)
+                .fill(
+                    configuration.isPressed
+                    ? Color.gray6
+                    : (highlighted ? Color("WBColor") : Color.sysBackground)
+                )
                 .stroke(.black.opacity(0.5), lineWidth: 0.2)
                 .shadow(
                     radius: configuration.isPressed ? 0.5 : 1,

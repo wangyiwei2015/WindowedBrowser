@@ -124,8 +124,11 @@ struct CompactWebWindow<Content: View>: View {
             .padding(.vertical, 75).padding(.horizontal, 16)
         }
         .opacity(activeStr == entry.1 ? 1.0 : 0.0)
-        .scaleEffect(activeStr == entry.1 ? 1.0 : 0.5)
-        .offset(y: activeStr == entry.1 ? 0 : 1000)
+        .scaleEffect(
+            x: activeStr == entry.1 ? 1.0 : 0.5,
+            y: activeStr == entry.1 ? 1.0 : 0.3
+        )
+        .offset(y: activeStr == entry.1 ? 0 : 400)
         .transition(.opacity.combined(with: .scale(0.96)))
     }
 }

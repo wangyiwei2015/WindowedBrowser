@@ -192,25 +192,38 @@ struct ContentView: View {
         VStack {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
                 ForEach(0..<allWindowsURL.count, id: \.self) {windowIndex in
-                    Menu {
-                        menuItems(windowIndex)
-                    } label: {
-                        ZStack {
-                            HStack {
-                                Image(uiImage: allWindowsURL[windowIndex].0)
-                                    .resizable().scaledToFit().frame(width: 24, height: 24)
-                                Text(allWindowsURL[windowIndex].1).lineLimit(1)
-                            }.padding(.vertical, 12).padding(.horizontal, 8)
-                        }.contextMenu {
+                    if supportsMultipleWindows {
+                        Menu {
                             menuItems(windowIndex)
-                        } // ZStack & ContextMenu
-                    } // Menu label
-                    .buttonStyle(HomeBtnStyle()).foregroundColor(Color("WBColor"))
+                        } label: {
+                            tabLabel(windowIndex)
+                        }.buttonStyle(HomeBtnStyle())
+                        .contextMenu { menuItems(windowIndex) }
+                    } else { // iPhone
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                compactActiveWindowStr = allWindowsURL[windowIndex].1
+                            }
+                        } label: {
+                            tabLabel(windowIndex)
+                        }.buttonStyle(HomeBtnStyle())
+                        .contextMenu { menuItems(windowIndex) }
+                    }
                 } // For each
             }.padding(.horizontal)
             Text("\(UIScreen.main.bounds.debugDescription)")
         }
     } // bottom view
+    
+    @ViewBuilder func tabLabel(_ windowIndex: Int) -> some View {
+        ZStack {
+            HStack {
+                Image(uiImage: allWindowsURL[windowIndex].0)
+                    .resizable().scaledToFit().frame(width: 24, height: 24)
+                Text(allWindowsURL[windowIndex].1).lineLimit(1)
+            }.padding(.vertical, 12).padding(.horizontal, 8)
+        }
+    }
     
     @ViewBuilder func menuItems(_ windowIndex: Int) -> some View {
         Button(role: .destructive) {
@@ -231,7 +244,12 @@ struct ContentView: View {
         Button {
             //
         } label: {
-            Label("Add bookmark", systemImage: "swift")
+            Label("Add bookmark", systemImage: "bookmark")
+        }
+        Button {
+            //
+        } label: {
+            Label("Share", systemImage: "square.and.arrow.up")
         }
         Button {
             if supportsMultipleWindows {
@@ -242,17 +260,14 @@ struct ContentView: View {
                 }
             }
         } label: {
-            Label("Show", systemImage: "swift")
+            Label("Show", systemImage: "arrow.down.left.and.arrow.up.right.square")
         }
     }
 }
 
 #Preview {
     ContentView(allWindowsURL: [
-        (UIImage(systemName: "swift")!, "www.aaa.com"),
-        (UIImage(systemName: "swift")!, "www.aaa.com"),
-        (UIImage(systemName: "swift")!, "www.aaa.com"),
-        (UIImage(systemName: "swift")!, "www.aaa.com"),
-        (UIImage(systemName: "swift")!, "www.aaa.com"),
-    ], iPhoneShowsConfig: true)
+        (UIImage(systemName: "swift")!, "www.bing.com"),
+        (UIImage(systemName: "swift")!, "about:blank"),
+    ], iPhoneShowsConfig: false)
 }

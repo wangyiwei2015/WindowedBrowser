@@ -71,10 +71,14 @@ struct PrefsView: View {
                                         sideLabel(
                                             item.name,
                                             fullImg: sysImg[item.order].fullImg,
-                                            miniImg: sysImg[item.order].miniImg
+                                            miniImg: sysImg[item.order].miniImg,
+                                            color: prefsDetailShowing == item
+                                            ? .white : Color("WBColor")
                                         )
                                     }.frame(height: 50)
-                                    .buttonStyle(HomeBtnStyle())
+                                    .buttonStyle(HomeBtnStyle(
+                                        highlighted: prefsDetailShowing == item
+                                    ))
                                 } // ForEach
                             }.padding(.top, 12).padding(.horizontal, 10)
                         }
@@ -93,7 +97,7 @@ struct PrefsView: View {
         }.ignoresSafeArea()
     }
     
-    @ViewBuilder func sideLabel(_ title: String, fullImg: String, miniImg: String) -> some View {
+    @ViewBuilder func sideLabel(_ title: String, fullImg: String, miniImg: String, color: Color = Color("WBColor")) -> some View {
         HStack(spacing: 0) {
             Image(systemName: miniImg)
                 .font(.system(size: 20))
@@ -102,7 +106,7 @@ struct PrefsView: View {
                 Text(title).font(.system(size: 20))
                 Spacer()
             }
-        }.foregroundColor(Color("WBColor"))
+        }.foregroundColor(color)
     }
     
     @ViewBuilder var prefsCompact: some View {
