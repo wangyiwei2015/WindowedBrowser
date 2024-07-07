@@ -21,6 +21,7 @@ struct ContentView: View {
     
     @State var showsQuitAlert = false
     @State var iPhoneShowsConfig = false
+    @State var compactActiveWindowStr: String = ""
     
     var body: some View {
         ZStack {
@@ -28,7 +29,7 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 VStack(spacing: 0) {
                     Color.sysBackground
-                    topBar.frame(height: supportsMultipleWindows ? 48 : 90)
+                    topBar.frame(height: supportsMultipleWindows ? 48 : 60)
                 }.frame(height: supportsMultipleWindows ? 48 : 90)
                 launchURLView
                 bookmarkView
@@ -38,32 +39,20 @@ struct ContentView: View {
             // overlay
             if !supportsMultipleWindows {
                 Color.black.opacity(
-                    iPhoneShowsConfig ? 0.5 : 0.0
+                    iPhoneShowsConfig || allWindowsURL.contains(where: { $0.1 == compactActiveWindowStr })
+                    ? 0.5 : 0.0
                 )
-                if iPhoneShowsConfig {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 6, style: .continuous)
-                            .fill(Color.sysBackground)
-                            .stroke(.black.opacity(0.5), lineWidth: 0.2)
-                            .shadow(radius: 3,y: 4)
-                            .zIndex(1)
-                        PrefsView().padding(6)
-                            .zIndex(2)
-                        VStack {
-                            HStack {
-                                Spacer()
-                                Button {
-                                    withAnimation(.easeInOut(duration: 0.2)) {
-                                        iPhoneShowsConfig = false
-                                    }
-                                } label: {
-                                    Image(systemName: "xmark").font(.title3).tint(.gray3)
-                                }.buttonStyle(TopbarBtnStyle(tint: .gray5)).frame(width: 50, height: 48)
-                                    .padding(.trailing, 6)
-                            }
-                            Spacer()
-                        }.zIndex(3)
-                    }.padding(.vertical, 75).padding(.horizontal, 16)
+                CompactWindow($iPhoneShowsConfig) {
+                    PrefsView()
+                }
+                ForEach(allWindowsURL, id: \.1) { webItem in
+                    CompactWebWindow(
+                        webItem, activeStr: $compactActiveWindowStr) {
+                            allWindowsURL.removeAll(where: { $0.1 == webItem.1 })
+                        } content: {
+                            WebpageView(entryURL: safeURL(webItem.1))
+                        }
+
                 }
             }
         }
@@ -129,7 +118,9 @@ struct ContentView: View {
         if supportsMultipleWindows {
             openWindow(id: "com.wyw.wb.webview", value: safeURL(urlString))
         } else { // iPhone
-            //
+            withAnimation(.easeInOut(duration: 0.2)) {
+                compactActiveWindowStr = urlString
+            }
         }
     }
     
@@ -229,7 +220,9 @@ struct ContentView: View {
                     value: safeURL(allWindowsURL[windowIndex].1)
                 )
             } else { // iPhone
-                //
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    compactActiveWindowStr = ""
+                }
             }
             allWindowsURL.remove(at: windowIndex)
         } label: {
@@ -241,7 +234,13 @@ struct ContentView: View {
             Label("Add bookmark", systemImage: "swift")
         }
         Button {
-            openWindow(id: "com.wyw.wb.webview", value: safeURL(allWindowsURL[windowIndex].1))
+            if supportsMultipleWindows {
+                openWindow(id: "com.wyw.wb.webview", value: safeURL(allWindowsURL[windowIndex].1))
+            } else { // iPhone
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    compactActiveWindowStr = allWindowsURL[windowIndex].1
+                }
+            }
         } label: {
             Label("Show", systemImage: "swift")
         }

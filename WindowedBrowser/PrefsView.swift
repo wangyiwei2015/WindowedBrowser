@@ -29,7 +29,7 @@ struct PrefsView: View {
                 Color.sysBackground
                 HStack(spacing: 0) {
                     Text("All Preferences")
-                        .font(.title2).bold()
+                        .bold()
                         .padding(.horizontal, 20)
                     Spacer()
                     Button {
@@ -51,7 +51,7 @@ struct PrefsView: View {
                             }
                         } label: {
                             sideLabel("Minimize", fullImg: "chevron.left", miniImg: "line.3.horizontal")
-                        }.frame(height: 40)
+                        }.frame(height: 50)
                         .buttonStyle(HomeBtnStyle())
                         .padding(.vertical, 12).padding(.horizontal, 10)
                         
@@ -73,7 +73,7 @@ struct PrefsView: View {
                                             fullImg: sysImg[item.order].fullImg,
                                             miniImg: sysImg[item.order].miniImg
                                         )
-                                    }.frame(height: 40)
+                                    }.frame(height: 50)
                                     .buttonStyle(HomeBtnStyle())
                                 } // ForEach
                             }.padding(.top, 12).padding(.horizontal, 10)
