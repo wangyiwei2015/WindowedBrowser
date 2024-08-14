@@ -170,7 +170,6 @@ struct ContentView: View {
     
     @ViewBuilder var bookmarkView: some View {
         VStack {
-            Text("URL scheme: w-browser://new?url={URL}")
             Text("Bookmarks")
             Button("NAS-SMALL") {
                 newTab("https://10.19.129.75:5001")

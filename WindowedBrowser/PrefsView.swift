@@ -118,6 +118,7 @@ struct PrefsView: View {
                     )) { item in
                         NavigationLink {
                             Text(item.name + "\(item.group)")
+                            Text("URL scheme: w-browser://new?url={URL}")
                         } label: {
                             sideLabel(
                                 item.name,
@@ -145,12 +146,14 @@ struct SidebarMenuItem: Hashable, Identifiable {
 let sidebarMenuItems: [SidebarMenuItem] = [
     .init(group: 0, order: 1, name: "About"),
     .init(group: 0, order: 2, name: "General"),
+    .init(group: 0, order: 3, name: "Advanced"),
 ]
 
 fileprivate let sysImg: [(fullImg: String, miniImg: String)] = [
     ("", ""),
     ("info.circle.fill", "info.circle.fill"), // about
     ("gearshape.fill", "gearshape.fill"), // general
+    ("switch.2", "switch.2"), // advanced //wrench.and.screwdriver.fill
 ]
 
 #Preview {
