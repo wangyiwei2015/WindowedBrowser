@@ -5,3 +5,5 @@
 如何添加桌面快捷方式
 
 URL 参数解码 %20
+
+environment objecxt use to manage window

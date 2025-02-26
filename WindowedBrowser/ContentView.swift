@@ -14,6 +14,8 @@ struct ContentView: View {
     @Environment(\.dismissWindow) var dismissWindow
     @Environment(\.dismiss) var dismiss
     
+    @EnvironmentObject var webStageShared: WebStageShared
+    
     @AppStorage("_OPEN_TABS") var openTabs: [TabInfo] = []
     
     @State var str: String = "https://"

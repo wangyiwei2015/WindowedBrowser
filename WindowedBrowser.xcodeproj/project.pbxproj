@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3015B052D1FD60600CF5790 /* WebStageShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3015B042D1FD5F200CF5790 /* WebStageShared.swift */; };
 		B3210FFC2AE0146600223753 /* WindowedBrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3210FFB2AE0146600223753 /* WindowedBrowserApp.swift */; };
 		B3210FFE2AE0146600223753 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3210FFD2AE0146600223753 /* ContentView.swift */; };
 		B32110002AE0146700223753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3210FFF2AE0146700223753 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B3015B042D1FD5F200CF5790 /* WebStageShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebStageShared.swift; sourceTree = "<group>"; };
 		B3210FF82AE0146600223753 /* WindowedBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WindowedBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3210FFB2AE0146600223753 /* WindowedBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowedBrowserApp.swift; sourceTree = "<group>"; };
 		B3210FFD2AE0146600223753 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		B3210FFA2AE0146600223753 /* WindowedBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				B3015B042D1FD5F200CF5790 /* WebStageShared.swift */,
 				B32110162AE02CA800223753 /* Info.plist */,
 				B3210FFB2AE0146600223753 /* WindowedBrowserApp.swift */,
 				B3210FFD2AE0146600223753 /* ContentView.swift */,
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3015B052D1FD60600CF5790 /* WebStageShared.swift in Sources */,
 				B321100F2AE018EA00223753 /* Globals.swift in Sources */,
 				B3210FFE2AE0146600223753 /* ContentView.swift in Sources */,
 				B3BD5DC52C3A622200AC22F2 /* CompactWindow.swift in Sources */,
