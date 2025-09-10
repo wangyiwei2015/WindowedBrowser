@@ -47,7 +47,7 @@ struct ContentView: View {
                 CompactWindow($iPhoneShowsConfig) {
                     PrefsView()
                 }
-                for each webStageShared.openWindows
+                //FIXME: for each webStageShared.openWindows
                 ForEach(allWindowsURL, id: \.1) { webItem in
                     CompactWebWindow(
                         webItem, activeStr: $compactActiveWindowStr) {
