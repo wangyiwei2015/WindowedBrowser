@@ -15,6 +15,7 @@ struct WebpageView: View {
     
     let helper = GlobalMsgHelper()
     
+    @EnvironmentObject var webStageShared: WebStageShared
     @StateObject var webViewStore = WebViewStore()
     @State var loaded = false
     
@@ -33,7 +34,7 @@ struct WebpageView: View {
                 }
             }
         }
-        .onDisappear {print("disap")}
+        .onDisappear { webStageShared.openWindows.removeAll { entryURL == $0.entryURL }}
     }
 }
 
