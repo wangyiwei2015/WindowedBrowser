@@ -12,7 +12,7 @@ class WebStageShared: ObservableObject {
     @Published var openWindows: [TabInfo] = []
 }
 
-struct TabInfo {//: Codable {
+struct TabInfo {
     let id = UUID()
     var entryURL: URL
     var title: String

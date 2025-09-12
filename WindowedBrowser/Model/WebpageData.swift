@@ -18,6 +18,3 @@ final class WebpageData: NSObject {
         self.onDismiss = onDismiss
     }
 }
-
-//extension WebpageData: Codable {
-//}

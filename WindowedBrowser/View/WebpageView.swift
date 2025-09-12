@@ -29,9 +29,6 @@ struct WebpageView: View {
                 wv.scrollView.contentInsetAdjustmentBehavior = .never
                 wv.load(URLRequest(url: entryURL))
                 loaded = true
-//                helper.onDestruction = {
-//                    onCloseWindow?(entryURL)
-//                }
             }
         }
         .onDisappear { webStageShared.openWindows.removeAll { entryURL == $0.entryURL }}
