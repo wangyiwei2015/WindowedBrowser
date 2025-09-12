@@ -38,12 +38,6 @@ extension Array: RawRepresentable where Element: Codable {
     }
 }
 
-struct TabInfo: Codable {
-    var id = UUID()
-    var entryURL: URL
-    var title: String
-}
-
 //extension UserDefaults {
 //    static let shared = UserDefaults(suiteName: "group.com.wyw.")!
 //}

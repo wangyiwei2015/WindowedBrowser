@@ -3,43 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B3015B052D1FD60600CF5790 /* WebStageShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3015B042D1FD5F200CF5790 /* WebStageShared.swift */; };
 		B3210FFC2AE0146600223753 /* WindowedBrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3210FFB2AE0146600223753 /* WindowedBrowserApp.swift */; };
-		B3210FFE2AE0146600223753 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3210FFD2AE0146600223753 /* ContentView.swift */; };
 		B32110002AE0146700223753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3210FFF2AE0146700223753 /* Assets.xcassets */; };
 		B32110032AE0146700223753 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B32110022AE0146700223753 /* Preview Assets.xcassets */; };
 		B321100B2AE0180500223753 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = B321100A2AE0180500223753 /* WebView */; };
-		B321100D2AE018B900223753 /* WebpageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B321100C2AE018B900223753 /* WebpageView.swift */; };
 		B321100F2AE018EA00223753 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B321100E2AE018EA00223753 /* Globals.swift */; };
-		B32110122AE0297C00223753 /* WebpageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32110112AE0297C00223753 /* WebpageData.swift */; };
 		B32110152AE02AF900223753 /* FaviconFinder in Frameworks */ = {isa = PBXBuildFile; productRef = B32110142AE02AF900223753 /* FaviconFinder */; };
-		B3BD5DC32C39423600AC22F2 /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BD5DC22C39423600AC22F2 /* PrefsView.swift */; };
-		B3BD5DC52C3A622200AC22F2 /* CompactWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BD5DC42C3A622200AC22F2 /* CompactWindow.swift */; };
+		B3D6D4752E741B33003EF3D4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B3D6D4742E741B33003EF3D4 /* SwiftSoup */; };
 		B3F6C45C2C32726A008CB576 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6C45B2C32726A008CB576 /* Styles.swift */; };
-		B3F6C45E2C357830008CB576 /* GlobalMsgHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6C45D2C357830008CB576 /* GlobalMsgHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B3015B042D1FD5F200CF5790 /* WebStageShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebStageShared.swift; sourceTree = "<group>"; };
 		B3210FF82AE0146600223753 /* WindowedBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WindowedBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3210FFB2AE0146600223753 /* WindowedBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowedBrowserApp.swift; sourceTree = "<group>"; };
-		B3210FFD2AE0146600223753 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B3210FFF2AE0146700223753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B32110022AE0146700223753 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B321100C2AE018B900223753 /* WebpageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebpageView.swift; sourceTree = "<group>"; };
 		B321100E2AE018EA00223753 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		B32110102AE01C1800223753 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
-		B32110112AE0297C00223753 /* WebpageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebpageData.swift; sourceTree = "<group>"; };
 		B32110162AE02CA800223753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		B3BD5DC22C39423600AC22F2 /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
-		B3BD5DC42C3A622200AC22F2 /* CompactWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactWindow.swift; sourceTree = "<group>"; };
 		B3F6C45B2C32726A008CB576 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		B3F6C45D2C357830008CB576 /* GlobalMsgHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMsgHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B3D6D4712E73D660003EF3D4 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
+		B3D6D4722E73D666003EF3D4 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B3210FF52AE0146600223753 /* Frameworks */ = {
@@ -48,6 +40,7 @@
 			files = (
 				B321100B2AE0180500223753 /* WebView in Frameworks */,
 				B32110152AE02AF900223753 /* FaviconFinder in Frameworks */,
+				B3D6D4752E741B33003EF3D4 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,19 +66,14 @@
 		B3210FFA2AE0146600223753 /* WindowedBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				B3015B042D1FD5F200CF5790 /* WebStageShared.swift */,
+				B3D6D4722E73D666003EF3D4 /* View */,
+				B3D6D4712E73D660003EF3D4 /* Model */,
 				B32110162AE02CA800223753 /* Info.plist */,
 				B3210FFB2AE0146600223753 /* WindowedBrowserApp.swift */,
-				B3210FFD2AE0146600223753 /* ContentView.swift */,
-				B3BD5DC42C3A622200AC22F2 /* CompactWindow.swift */,
-				B321100C2AE018B900223753 /* WebpageView.swift */,
-				B32110112AE0297C00223753 /* WebpageData.swift */,
-				B3BD5DC22C39423600AC22F2 /* PrefsView.swift */,
+				B3F6C45B2C32726A008CB576 /* Styles.swift */,
+				B321100E2AE018EA00223753 /* Globals.swift */,
 				B3210FFF2AE0146700223753 /* Assets.xcassets */,
 				B32110012AE0146700223753 /* Preview Content */,
-				B3F6C45B2C32726A008CB576 /* Styles.swift */,
-				B3F6C45D2C357830008CB576 /* GlobalMsgHelper.swift */,
-				B321100E2AE018EA00223753 /* Globals.swift */,
 				B32110102AE01C1800223753 /* TODO.md */,
 			);
 			path = WindowedBrowser;
@@ -114,10 +102,15 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				B3D6D4712E73D660003EF3D4 /* Model */,
+				B3D6D4722E73D666003EF3D4 /* View */,
+			);
 			name = WindowedBrowser;
 			packageProductDependencies = (
 				B321100A2AE0180500223753 /* WebView */,
 				B32110142AE02AF900223753 /* FaviconFinder */,
+				B3D6D4742E741B33003EF3D4 /* SwiftSoup */,
 			);
 			productName = WindowedBrowser;
 			productReference = B3210FF82AE0146600223753 /* WindowedBrowser.app */;
@@ -150,6 +143,7 @@
 			packageReferences = (
 				B32110092AE0180500223753 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
 				B32110132AE02AF900223753 /* XCRemoteSwiftPackageReference "FaviconFinder" */,
+				B3D6D4732E741B33003EF3D4 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = B3210FF92AE0146600223753 /* Products */;
 			projectDirPath = "";
@@ -177,15 +171,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3015B052D1FD60600CF5790 /* WebStageShared.swift in Sources */,
 				B321100F2AE018EA00223753 /* Globals.swift in Sources */,
-				B3210FFE2AE0146600223753 /* ContentView.swift in Sources */,
-				B3BD5DC52C3A622200AC22F2 /* CompactWindow.swift in Sources */,
-				B32110122AE0297C00223753 /* WebpageData.swift in Sources */,
 				B3F6C45C2C32726A008CB576 /* Styles.swift in Sources */,
-				B3F6C45E2C357830008CB576 /* GlobalMsgHelper.swift in Sources */,
-				B3BD5DC32C39423600AC22F2 /* PrefsView.swift in Sources */,
-				B321100D2AE018B900223753 /* WebpageView.swift in Sources */,
 				B3210FFC2AE0146600223753 /* WindowedBrowserApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,7 +323,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.10;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.WindowedBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -371,7 +358,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.10;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.WindowedBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -411,7 +398,7 @@
 			repositoryURL = "https://github.com/kylehickinson/SwiftUI-WebView";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
+				minimumVersion = 0.3.1;
 			};
 		};
 		B32110132AE02AF900223753 /* XCRemoteSwiftPackageReference "FaviconFinder" */ = {
@@ -419,7 +406,15 @@
 			repositoryURL = "https://github.com/will-lumley/FaviconFinder";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.0;
+				minimumVersion = 5.1.4;
+			};
+		};
+		B3D6D4732E741B33003EF3D4 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.11.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -434,6 +429,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B32110132AE02AF900223753 /* XCRemoteSwiftPackageReference "FaviconFinder" */;
 			productName = FaviconFinder;
+		};
+		B3D6D4742E741B33003EF3D4 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3D6D4732E741B33003EF3D4 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

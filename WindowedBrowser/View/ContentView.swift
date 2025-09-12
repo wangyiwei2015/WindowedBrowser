@@ -16,14 +16,14 @@ struct ContentView: View {
     
     @EnvironmentObject var webStageShared: WebStageShared
     
-    @AppStorage("_OPEN_TABS") var openTabs: [TabInfo] = []
+    //@AppStorage("_OPEN_TABS") var openTabs: [TabInfo] = []
     
     @State var str: String = "https://"
-    @State var allWindowsURL: [(UIImage, String)] = []
+    //@State var allWindowsURL: [(UIImage, String)] = []
     
     @State var showsQuitAlert = false
     @State var iPhoneShowsConfig = false
-    @State var compactActiveWindowStr: String = ""
+    @State var compactActiveWindowURL: URL? = nil
     
     var body: some View {
         ZStack {
@@ -41,19 +41,19 @@ struct ContentView: View {
             // overlay
             if !supportsMultipleWindows {
                 Color.black.opacity(
-                    iPhoneShowsConfig || allWindowsURL.contains(where: { $0.1 == compactActiveWindowStr })
-                    ? 0.5 : 0.0
+                    iPhoneShowsConfig || webStageShared.openWindows
+                        .contains { $0.entryURL == compactActiveWindowURL }
+                        ? 0.5 : 0.0
                 )
                 CompactWindow($iPhoneShowsConfig) {
                     PrefsView()
                 }
-                //FIXME: for each webStageShared.openWindows
-                ForEach(allWindowsURL, id: \.1) { webItem in
+                ForEach(webStageShared.openWindows, id: \.id) { webItem in
                     CompactWebWindow(
-                        webItem, activeStr: $compactActiveWindowStr) {
-                            allWindowsURL.removeAll(where: { $0.1 == webItem.1 })
+                        webItem, activeURL: $compactActiveWindowURL) {
+                            webStageShared.openWindows.removeAll { $0.entryURL == webItem.entryURL }
                         } content: {
-                            WebpageView(entryURL: safeURL(webItem.1))
+                            WebpageView(entryURL: webItem.entryURL)
                         }
 
                 }
@@ -81,12 +81,12 @@ struct ContentView: View {
             } else {
                 homeWindowOpen = true
             }
-            onCloseWindow = { url in
-                print(allWindowsURL.first(where: { safeURL($0.1) == url }))
-                allWindowsURL.removeAll(
-                    where: { safeURL($0.1) == url }
-                )
-            }
+//            onCloseWindow = { url in
+//                print(allWindowsURL.first(where: { safeURL($0.1) == url }))
+//                allWindowsURL.removeAll(
+//                    where: { safeURL($0.1) == url }
+//                )
+//            }
         }
         .alert(
             Text("Quit WBrowser"), isPresented: $showsQuitAlert) {
@@ -101,20 +101,20 @@ struct ContentView: View {
                     }
                 }
             } message: {
-                Text("You have \(allWindowsURL.count) open windows")
+                Text("You have \(webStageShared.openWindows.count) open windows")
             }
     }
     
     func newTab(_ urlString: String) {
-        if !allWindowsURL.contains(where: {$0.1 == urlString}) {
-            allWindowsURL.append((UIImage(), urlString))
+        if !webStageShared.openWindows.contains(where: {$0.entryURL.absoluteString == urlString}) {
+            webStageShared.openWindows.append(.init(entryURL: safeURL(urlString), title: "title000"))
             Task {
                 do {
                     let favicon = try await FaviconFinder(url: safeURL(urlString))
-                        .downloadFavicon()
-                    //print("URL of Favicon: \(favicon.url)")
-                    let idx = allWindowsURL.firstIndex(where: {$0.1 == urlString})!
-                    allWindowsURL[idx].0 = favicon.image
+                        .fetchFaviconURLs().first?
+                        .download().image?.image
+                    let idx = webStageShared.openWindows.firstIndex(where: {$0.entryURL.absoluteString == urlString})!
+                    webStageShared.openWindows[idx].favicon = favicon
                 } catch let error {print("Error: \(error)")}
             }
         }
@@ -122,7 +122,7 @@ struct ContentView: View {
             openWindow(id: "com.wyw.wb.webview", value: safeURL(urlString))
         } else { // iPhone
             withAnimation(.easeInOut(duration: 0.2)) {
-                compactActiveWindowStr = urlString
+                compactActiveWindowURL = safeURL(urlString)
             }
         }
     }
@@ -132,8 +132,8 @@ struct ContentView: View {
             Color.sysBackground
             HStack(spacing: 0) {
                 Text(supportsMultipleWindows
-                    ? "WBrowser Home (\(allWindowsURL.count) tabs)"
-                     : "\(allWindowsURL.count) tabs"
+                    ? "WBrowser Home (\(webStageShared.openWindows.count) tabs)"
+                     : "\(webStageShared.openWindows.count) tabs"
                 ).padding(.horizontal, 20)
                 Spacer()
                 Button {
@@ -193,7 +193,7 @@ struct ContentView: View {
     @ViewBuilder var bottomTabs: some View {
         VStack {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
-                ForEach(0..<allWindowsURL.count, id: \.self) {windowIndex in
+                ForEach(0..<webStageShared.openWindows.count, id: \.self) {windowIndex in
                     if supportsMultipleWindows {
                         Menu {
                             menuItems(windowIndex)
@@ -204,7 +204,7 @@ struct ContentView: View {
                     } else { // iPhone
                         Button {
                             withAnimation(.easeInOut(duration: 0.2)) {
-                                compactActiveWindowStr = allWindowsURL[windowIndex].1
+                                compactActiveWindowURL = webStageShared.openWindows[windowIndex].entryURL
                             }
                         } label: {
                             tabLabel(windowIndex)
@@ -220,9 +220,11 @@ struct ContentView: View {
     @ViewBuilder func tabLabel(_ windowIndex: Int) -> some View {
         ZStack {
             HStack {
-                Image(uiImage: allWindowsURL[windowIndex].0)
-                    .resizable().scaledToFit().frame(width: 24, height: 24)
-                Text(allWindowsURL[windowIndex].1).lineLimit(1)
+                if let favicon = webStageShared.openWindows[windowIndex].favicon {
+                    Image(uiImage: favicon).resizable().scaledToFit()
+                        .frame(width: 24, height: 24)
+                }
+                Text(webStageShared.openWindows[windowIndex].title).lineLimit(1)
             }.padding(.vertical, 12).padding(.horizontal, 8)
         }
     }
@@ -232,14 +234,15 @@ struct ContentView: View {
             if supportsMultipleWindows {
                 dismissWindow(
                     id: "com.wyw.wb.webview",
-                    value: safeURL(allWindowsURL[windowIndex].1)
+                    value: webStageShared.openWindows[windowIndex].entryURL
+                    //value: safeURL(allWindowsURL[windowIndex].1)
                 )
             } else { // iPhone
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    compactActiveWindowStr = ""
+                    compactActiveWindowURL = nil
                 }
             }
-            allWindowsURL.remove(at: windowIndex)
+            webStageShared.openWindows.remove(at: windowIndex)
         } label: {
             Label("Close", systemImage: "xmark")
         }
@@ -255,10 +258,14 @@ struct ContentView: View {
         }
         Button {
             if supportsMultipleWindows {
-                openWindow(id: "com.wyw.wb.webview", value: safeURL(allWindowsURL[windowIndex].1))
+                openWindow(
+                    id: "com.wyw.wb.webview",
+                    value: webStageShared.openWindows[windowIndex].entryURL
+                    //value: safeURL(allWindowsURL[windowIndex].1)
+                )
             } else { // iPhone
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    compactActiveWindowStr = allWindowsURL[windowIndex].1
+                    compactActiveWindowURL = webStageShared.openWindows[windowIndex].entryURL
                 }
             }
         } label: {
@@ -268,8 +275,9 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(allWindowsURL: [
-        (UIImage(systemName: "swift")!, "www.bing.com"),
-        (UIImage(systemName: "swift")!, "about:blank"),
-    ], iPhoneShowsConfig: false)
+//    ContentView(allWindowsURL: [
+//        (UIImage(systemName: "swift")!, "www.bing.com"),
+//        (UIImage(systemName: "swift")!, "about:blank"),
+//    ], iPhoneShowsConfig: false)
+    ContentView().environmentObject(WebStageShared())
 }

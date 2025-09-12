@@ -1,12 +1,31 @@
 {
+  "originHash" : "79d97b2cc1b64aa99fe7a58c01fd0cb9ffeb0d852255de4c9f8e4136cda0b28f",
   "pins" : [
     {
       "identity" : "faviconfinder",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/will-lumley/FaviconFinder",
       "state" : {
-        "revision" : "48f98ceadd8ee3d484016201fe1115d0d23fa87d",
-        "version" : "4.2.0"
+        "revision" : "9279f4371f4877ca302ba3bf1015f3f58ae4a56c",
+        "version" : "5.1.4"
+      }
+    },
+    {
+      "identity" : "lrucache",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nicklockwood/LRUCache.git",
+      "state" : {
+        "revision" : "e0e9e039b33db8f2ef39b8e25607e38f46b13584",
+        "version" : "1.1.2"
+      }
+    },
+    {
+      "identity" : "swift-atomics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-atomics.git",
+      "state" : {
+        "revision" : "b601256eab081c0f92f059e12818ac1d4f178ff7",
+        "version" : "1.3.0"
       }
     },
     {
@@ -14,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
-        "version" : "2.6.1"
+        "revision" : "db0428bcfced386943c05ba8ea3e607baa715e45",
+        "version" : "2.11.0"
       }
     },
     {
@@ -23,10 +42,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kylehickinson/SwiftUI-WebView",
       "state" : {
-        "revision" : "a67dcaff2377573a51f75761bb6e768b78931909",
-        "version" : "0.3.0"
+        "revision" : "8abc88c7c5c98da391a60a401110ddf59a7b961a",
+        "version" : "0.3.1"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

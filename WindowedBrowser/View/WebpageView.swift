@@ -13,7 +13,7 @@ struct WebpageView: View {
     var entryURL: URL
     fileprivate let navDelegate = SimpleDelegate()
     
-    let helper = GlobalMsgHelper()
+    //let helper = GlobalMsgHelper()
     
     @EnvironmentObject var webStageShared: WebStageShared
     @StateObject var webViewStore = WebViewStore()
@@ -29,9 +29,9 @@ struct WebpageView: View {
                 wv.scrollView.contentInsetAdjustmentBehavior = .never
                 wv.load(URLRequest(url: entryURL))
                 loaded = true
-                helper.onDestruction = {
-                    onCloseWindow?(entryURL)
-                }
+//                helper.onDestruction = {
+//                    onCloseWindow?(entryURL)
+//                }
             }
         }
         .onDisappear { webStageShared.openWindows.removeAll { entryURL == $0.entryURL }}

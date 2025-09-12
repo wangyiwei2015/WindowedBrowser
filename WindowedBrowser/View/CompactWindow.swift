@@ -63,18 +63,19 @@ struct CompactWindow<Content: View>: View {
 }
 
 struct CompactWebWindow<Content: View>: View {
-    var entry: (UIImage, String)
-    @Binding var activeStr: String
+    //var entry: (UIImage, String)
+    var entry: TabInfo
+    @Binding var activeURL: URL?
     var dismissAction: (() -> Void)
     var content: () -> Content
     
     init(
-        _ entry: (UIImage, String), activeStr: Binding<String>,
+        _ entry: TabInfo, activeURL: Binding<URL?>,
         dismissAction: @escaping (() -> Void),
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.entry = entry
-        self._activeStr = activeStr
+        self._activeURL = activeURL
         self.dismissAction = dismissAction
         self.content = content
     }
@@ -91,14 +92,17 @@ struct CompactWebWindow<Content: View>: View {
                 VStack(spacing: 0) {
                     HStack {
                         HStack {
-                            Image(uiImage: entry.0)
-                                .resizable().scaledToFit().frame(width: 24, height: 24)
-                            Text(entry.1).lineLimit(1)
+                            if let favicon = entry.favicon {
+                                Image(uiImage: favicon)
+                                    .resizable().scaledToFit()
+                                    .frame(width: 24, height: 24)
+                            }
+                            Text(entry.title).lineLimit(1)
                         }.padding(.horizontal, 8)
                         Spacer()
                         Button {
                             withAnimation(.easeInOut(duration: 0.2)) {
-                                activeStr = ""
+                                activeURL = nil
                             }
                         } label: {
                             Image(systemName: "minus").font(.title3).tint(.gray3)
@@ -123,12 +127,12 @@ struct CompactWebWindow<Content: View>: View {
             }
             .padding(.vertical, 75).padding(.horizontal, 16)
         }
-        .opacity(activeStr == entry.1 ? 1.0 : 0.0)
+        .opacity(activeURL == entry.entryURL ? 1.0 : 0.0)
         .scaleEffect(
-            x: activeStr == entry.1 ? 1.0 : 0.5,
-            y: activeStr == entry.1 ? 1.0 : 0.3
+            x: activeURL == entry.entryURL ? 1.0 : 0.5,
+            y: activeURL == entry.entryURL ? 1.0 : 0.3
         )
-        .offset(y: activeStr == entry.1 ? 0 : 400)
+        .offset(y: activeURL == entry.entryURL ? 0 : 400)
         .transition(.opacity.combined(with: .scale(0.96)))
     }
 }

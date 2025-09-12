@@ -11,3 +11,10 @@ import Combine
 class WebStageShared: ObservableObject {
     @Published var openWindows: [TabInfo] = []
 }
+
+struct TabInfo {//: Codable {
+    let id = UUID()
+    var entryURL: URL
+    var title: String
+    var favicon: UIImage? = nil
+}
