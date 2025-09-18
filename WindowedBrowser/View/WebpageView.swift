@@ -10,14 +10,23 @@ import WebView
 import WebKit
 
 struct WebpageView: View {
-    var entryURL: URL
+    let tabID: UUID?
     fileprivate let navDelegate = SimpleDelegate()
-    
-    //let helper = GlobalMsgHelper()
-    
+    var entryURL: URL {
+        webStageShared.openWindows
+            .first { $0.id == tabID }?
+            .entryURL ?? URL(string: "about:blank")!
+    }
     @EnvironmentObject var webStageShared: WebStageShared
-    @StateObject var webViewStore = WebViewStore()
-    @State var loaded = false
+    @StateObject private var webViewStore = WebViewStore()
+    @State private var loaded = false
+    
+//    init(tabID: UUID) {
+//        self.tabID = tabID
+//        self.entryURL = webStageShared.openWindows
+//            .first { $0.id == tabID }?
+//            .entryURL ?? URL(string: "about:blank")!
+//    }
     
     var body: some View {
         WebView(webView: webViewStore.webView)
@@ -31,7 +40,7 @@ struct WebpageView: View {
                 loaded = true
             }
         }
-        .onDisappear { webStageShared.openWindows.removeAll { entryURL == $0.entryURL }}
+        .onDisappear { webStageShared.openWindows.removeAll { tabID == $0.id }}
     }
 }
 
@@ -43,6 +52,6 @@ class SimpleDelegate: NSObject, WKNavigationDelegate {
     }
 }
 
-#Preview {
-    WebpageView(entryURL: URL(string: "about:blank")!)
-}
+//#Preview {
+//    WebpageView(entryURL: URL(string: "about:blank")!)
+//}

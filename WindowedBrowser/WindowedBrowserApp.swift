@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct WindowedBrowserApp: App {
     
-    @ObservedObject var webStageShared = WebStageShared()
+    @ObservedObject var webStageShared = WebStageShared(restore: true)
     
     var body: some Scene {
         WindowGroup("Home", id: "com.wyw.wb.main") {
@@ -20,8 +20,8 @@ struct WindowedBrowserApp: App {
         .windowStyle(.hiddenTitleBar)
         #endif
         
-        WindowGroup("Web Page",id: "com.wyw.wb.webview", for: URL.self) { url in
-            WebpageView(entryURL: url.wrappedValue ?? URL(string: "about:blank")!)
+        WindowGroup("Web Page",id: "com.wyw.wb.webview", for: UUID.self) { id in
+            WebpageView(tabID: id.wrappedValue)
                 .environmentObject(webStageShared)
         }.defaultSize(width: .infinity, height: .infinity)
         

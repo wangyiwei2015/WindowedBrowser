@@ -65,17 +65,17 @@ struct CompactWindow<Content: View>: View {
 struct CompactWebWindow<Content: View>: View {
     //var entry: (UIImage, String)
     var entry: TabInfo
-    @Binding var activeURL: URL?
+    @Binding var activeTabID: UUID?
     var dismissAction: (() -> Void)
     var content: () -> Content
     
     init(
-        _ entry: TabInfo, activeURL: Binding<URL?>,
+        _ entry: TabInfo, activeTabID: Binding<UUID?>,
         dismissAction: @escaping (() -> Void),
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.entry = entry
-        self._activeURL = activeURL
+        self._activeTabID = activeTabID
         self.dismissAction = dismissAction
         self.content = content
     }
@@ -97,12 +97,12 @@ struct CompactWebWindow<Content: View>: View {
                                     .resizable().scaledToFit()
                                     .frame(width: 24, height: 24)
                             }
-                            Text(entry.title).lineLimit(1)
+                            Text(entry.titleString).lineLimit(1)
                         }.padding(.horizontal, 8)
                         Spacer()
                         Button {
                             withAnimation(.easeInOut(duration: 0.2)) {
-                                activeURL = nil
+                                activeTabID = nil
                             }
                         } label: {
                             Image(systemName: "minus").font(.title3).tint(.gray3)
@@ -127,12 +127,12 @@ struct CompactWebWindow<Content: View>: View {
             }
             .padding(.vertical, 75).padding(.horizontal, 16)
         }
-        .opacity(activeURL == entry.entryURL ? 1.0 : 0.0)
+        .opacity(activeTabID == entry.id ? 1.0 : 0.0)
         .scaleEffect(
-            x: activeURL == entry.entryURL ? 1.0 : 0.5,
-            y: activeURL == entry.entryURL ? 1.0 : 0.3
+            x: activeTabID == entry.id ? 1.0 : 0.5,
+            y: activeTabID == entry.id ? 1.0 : 0.3
         )
-        .offset(y: activeURL == entry.entryURL ? 0 : 400)
+        .offset(y: activeTabID == entry.id ? 0 : 400)
         .transition(.opacity.combined(with: .scale(0.96)))
     }
 }
