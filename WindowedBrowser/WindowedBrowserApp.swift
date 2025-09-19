@@ -23,7 +23,7 @@ struct WindowedBrowserApp: App {
         WindowGroup("Web Page",id: "com.wyw.wb.webview", for: UUID.self) { id in
             WebpageView(tabID: id.wrappedValue)
                 .environmentObject(webStageShared)
-        }.defaultSize(width: .infinity, height: .infinity)
+        }//.defaultSize(width: .infinity, height: .infinity)
         
         WindowGroup("Preferences", id: "com.wyw.wb.prefs") {
             PrefsView().environmentObject(webStageShared)

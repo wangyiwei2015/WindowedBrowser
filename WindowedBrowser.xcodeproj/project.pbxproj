@@ -15,6 +15,7 @@
 		B32110152AE02AF900223753 /* FaviconFinder in Frameworks */ = {isa = PBXBuildFile; productRef = B32110142AE02AF900223753 /* FaviconFinder */; };
 		B3D6D4752E741B33003EF3D4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B3D6D4742E741B33003EF3D4 /* SwiftSoup */; };
 		B3F6C45C2C32726A008CB576 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6C45B2C32726A008CB576 /* Styles.swift */; };
+		DF8C52972E7D379000D933D5 /* WebStageSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C52962E7D379000D933D5 /* WebStageSharedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +27,10 @@
 		B32110102AE01C1800223753 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		B32110162AE02CA800223753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B3F6C45B2C32726A008CB576 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		DF8C52962E7D379000D933D5 /* WebStageSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebStageSharedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B3D6D4712E73D660003EF3D4 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
 		B3D6D4722E73D666003EF3D4 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -66,10 +67,10 @@
 		B3210FFA2AE0146600223753 /* WindowedBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				B3D6D4722E73D666003EF3D4 /* View */,
-				B3D6D4712E73D660003EF3D4 /* Model */,
-				B32110162AE02CA800223753 /* Info.plist */,
 				B3210FFB2AE0146600223753 /* WindowedBrowserApp.swift */,
+				B3D6D4722E73D666003EF3D4 /* View */,
+				B32110162AE02CA800223753 /* Info.plist */,
+				DF8C52962E7D379000D933D5 /* WebStageSharedModel.swift */,
 				B3F6C45B2C32726A008CB576 /* Styles.swift */,
 				B321100E2AE018EA00223753 /* Globals.swift */,
 				B3210FFF2AE0146700223753 /* Assets.xcassets */,
@@ -103,7 +104,6 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B3D6D4712E73D660003EF3D4 /* Model */,
 				B3D6D4722E73D666003EF3D4 /* View */,
 			);
 			name = WindowedBrowser;
@@ -171,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF8C52972E7D379000D933D5 /* WebStageSharedModel.swift in Sources */,
 				B321100F2AE018EA00223753 /* Globals.swift in Sources */,
 				B3F6C45C2C32726A008CB576 /* Styles.swift in Sources */,
 				B3210FFC2AE0146600223753 /* WindowedBrowserApp.swift in Sources */,
@@ -323,7 +324,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.2;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.WindowedBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -358,7 +359,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.2;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.WindowedBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
