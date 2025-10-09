@@ -19,7 +19,7 @@ struct ContentView: View {
     @State var str: String = "https://"
     @State var showsQuitAlert = false
     @State var iPhoneShowsConfig = false
-    @State var compactActiveWindowID: UUID? = nil
+//    @State var compactActiveWindowID: UUID? = nil
     
     var body: some View {
         ZStack {
@@ -43,7 +43,7 @@ struct ContentView: View {
             if !supportsMultipleWindows {
                 Color.black.opacity(
                     iPhoneShowsConfig || webStageShared.openWindows
-                        .contains { $0.id == compactActiveWindowID }
+                        .contains { $0.id == webStageShared.compactActiveWindowID }
                         ? 0.5 : 0.0
                 )
                 CompactWindow($iPhoneShowsConfig) {
@@ -51,7 +51,7 @@ struct ContentView: View {
                 }
                 ForEach(webStageShared.openWindows, id: \.id) { webItem in
                     CompactWebWindow(
-                        webItem, activeTabID: $compactActiveWindowID) {
+                        webItem, activeTabID: $webStageShared.compactActiveWindowID) {
                             webStageShared.openWindows.removeAll { $0.id == webItem.id }
                         } content: {
                             WebpageView(tabID: webItem.id)

@@ -10,6 +10,7 @@ import Combine
 
 class WebStageShared: ObservableObject {
     @Published var openWindows: [TabInfo] = []
+    @Published var compactActiveWindowID: UUID? = nil
     
     func saveSession() {
         var savedTabs: [UUID: URL] = [:]

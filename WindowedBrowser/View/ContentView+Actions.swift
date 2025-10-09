@@ -21,7 +21,7 @@ extension ContentView {
             openWindow(id: "com.wyw.wb.webview", value: newItem.id)
         } else { // iPhone
             withAnimation(.easeInOut(duration: 0.2)) {
-                compactActiveWindowID = newItem.id
+                webStageShared.compactActiveWindowID = newItem.id
             }
         }
     }
@@ -33,7 +33,7 @@ extension ContentView {
             )
         } else { // iPhone
             withAnimation(.easeInOut(duration: 0.2)) {
-                compactActiveWindowID = id
+                webStageShared.compactActiveWindowID = id
             }
         }
     }
@@ -46,7 +46,7 @@ extension ContentView {
             )
         } else { // iPhone
             withAnimation(.easeInOut(duration: 0.2)) {
-                compactActiveWindowID = nil
+                webStageShared.compactActiveWindowID = nil
             }
         }
         webStageShared.openWindows.remove(at: index)
